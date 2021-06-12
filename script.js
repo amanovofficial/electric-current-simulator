@@ -85,6 +85,9 @@ window.setInterval(draw, redrawInterval);
 
 function draw() {
 
+    // Очистка результата предыдушего рендера
+    clear()
+
     // Отрисовка элементов электрической цепи
     drawPowerSource()
 
@@ -231,6 +234,11 @@ function updateOffsets(isSwitchOn) {
 
     if (currentOffset >= 100) currentOffset = 0;
     if (currentOffset2 <= - 100) currentOffset2 = 0;
+}
+
+// Очистка результата предыдущего рендера
+function clear(){
+    context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 // ****************************************************************************************
