@@ -93,6 +93,8 @@ function draw() {
     // Отрисовка проводников
     drawTopAndRightLines()
 
+    drawLeftAndBottomLines()
+
 }
 
 function drawPowerSource() {
@@ -196,6 +198,24 @@ function drawTopAndRightLines() {
     context.dashedLine(canvas.width - paddingLeftRight, canvas.height / 2 + 20, canvas.width - paddingLeftRight, canvas.height - paddingTopBottom, dashGapArray, currentOffset)
     context.stroke(); //Завершить линию
 
+};
+
+
+// Функция для отрисовки нижнюю и левую линии
+function drawLeftAndBottomLines() {
+
+    context.beginPath();
+
+    // Правая вертикальная линия до источника питания
+    context.dashedLine(paddingLeftRight, paddingTopBottom, paddingLeftRight, canvas.height / 2 - 32, dashGapArray, currentOffset2);
+
+    // Правая вертикальная линия после источника питания
+    context.dashedLine(paddingLeftRight, canvas.height / 2 - 10, paddingLeftRight, canvas.height - paddingTopBottom, dashGapArray, currentOffset2);
+
+    // Нижняя линия
+    context.dashedLine(paddingLeftRight, canvas.height - paddingTopBottom, canvas.width - paddingLeftRight, canvas.height - paddingTopBottom, dashGapArray, currentOffset2);
+
+    context.stroke();
 };
 // ****************************************************************************************
 
