@@ -1,3 +1,4 @@
+// ************************************ БАЗОВАЯ ФУНКЦИЯ ****************************************
 CanvasRenderingContext2D.prototype.dashedLine = function (x, y, x2, y2, dashArray, start) {
     let dashCount = dashArray.length;
     let dashSize = 0;
@@ -52,7 +53,7 @@ CanvasRenderingContext2D.prototype.dashedLine = function (x, y, x2, y2, dashArra
     }
     this.moveTo(100, 0);
 }
-// ************************************************************************
+// ************************************ ИНИЦИАЛИЗАЦИЯ ****************************************
 
 let canvas = document.getElementsByTagName('canvas')[0];
 
@@ -64,3 +65,40 @@ context.lineWidth = 2
 context.font = '20px arial'
 context.strokeStyle = 'red' //цвет линий
 context.fillStyle = 'yellow' //цвет заливки
+
+const paddingTopBottom = 130 //отступы сверху и снизу
+const paddingLeftRight = 350 //отступы слева и справа
+
+// ************************************ ОСНОВНАЯ ЧАСТЬ ****************************************
+
+draw()
+
+// ************************************ ФУНКЦИИ ****************************************
+function draw() {
+
+    drawPowerSource()
+
+}
+
+function drawPowerSource() {
+    // Надпись источника питания
+    context.strokeText('Источник', paddingLeftRight - 130, canvas.height / 2 - 30)
+    context.strokeText('питания', paddingLeftRight - 130, canvas.height / 2 - 10)
+
+    // Знаки полярности источника питания
+    context.strokeText('+', paddingLeftRight + 25, canvas.height / 2 - 25)
+    context.strokeText('-', paddingLeftRight + 27, canvas.height / 2 - 5)
+
+    // Источник питания (большая черта)
+    context.beginPath()
+    context.moveTo(paddingLeftRight - 15, canvas.height / 2 - 25)
+    context.lineTo(paddingLeftRight + 15, canvas.height / 2 - 25)
+
+    // Источник питания (маленькая черта)
+    context.moveTo(paddingLeftRight - 10, canvas.height / 2 - 15)
+    context.lineTo(paddingLeftRight + 10, canvas.height / 2 - 15)
+    context.stroke()
+}
+
+// ****************************************************************************************
+
