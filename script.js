@@ -55,6 +55,8 @@ CanvasRenderingContext2D.prototype.dashedLine = function (x, y, x2, y2, dashArra
 }
 // ************************************ ИНИЦИАЛИЗАЦИЯ ****************************************
 
+const body = document.getElementsByTagName('body')[0]
+body.addEventListener('click', switchLamp);
 let canvas = document.getElementsByTagName('canvas')[0];
 
 // Свойства canvas'a
@@ -69,6 +71,7 @@ context.fillStyle = 'yellow' //цвет заливки
 const paddingTopBottom = 130 //отступы сверху и снизу
 const paddingLeftRight = 350 //отступы слева и справа
 
+let isSwitchOn = false //состояние выключателя
 // ************************************ ОСНОВНАЯ ЧАСТЬ ****************************************
 
 draw()
@@ -77,6 +80,8 @@ draw()
 function draw() {
 
     drawPowerSource()
+
+    drawSwitchKey()
 
 }
 
@@ -98,6 +103,52 @@ function drawPowerSource() {
     context.moveTo(paddingLeftRight - 10, canvas.height / 2 - 15)
     context.lineTo(paddingLeftRight + 10, canvas.height / 2 - 15)
     context.stroke()
+}
+
+
+function drawSwitchKey() {
+
+    context.strokeText('Выключатель', canvas.width / 2 - 55, paddingTopBottom - 40)
+    context.beginPath();
+
+    if (isSwitchOn) {
+        // Включенное состояние выключателя
+        context.moveTo(canvas.width / 2 - 20, paddingTopBottom)
+        context.lineTo(canvas.width / 2 + 18, paddingTopBottom)
+    } else {
+        // Отключенное состояние выключателя
+        context.moveTo(canvas.width / 2 - 25, paddingTopBottom)
+        context.lineTo(canvas.width / 2 + 10, paddingTopBottom - 30)
+    }
+
+    // Координаты левого контакта выключателя
+    const leftContactPos = {
+        x: canvas.width / 2 - 25,
+        y: paddingTopBottom
+    }
+
+    // Координаты правого контакта выключателя
+    const rightContactPos = {
+        x: canvas.width / 2 + 25,
+        y: paddingTopBottom
+    }
+
+    // Контакт выключателя(слева)
+    context.moveTo(leftContactPos.x + 5, leftContactPos.y);
+    context.arc(leftContactPos.x, leftContactPos.y, 5, 0, 2 * Math.PI);
+
+    // Контакт выключателя(справа)
+    context.moveTo(rightContactPos.x + 5, rightContactPos.y);
+    context.arc(rightContactPos.x, rightContactPos.y, 5, 0, 2 * Math.PI);
+
+    context.stroke()
+    context.fill() //заливка круга цветом 
+
+}
+
+// Переключение лампочки
+function switchLamp() {
+    isSwitchOn = isSwitchOn ? false : true
 }
 
 // ****************************************************************************************
