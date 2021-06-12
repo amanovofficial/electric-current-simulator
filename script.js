@@ -72,6 +72,10 @@ const paddingTopBottom = 130 //отступы сверху и снизу
 const paddingLeftRight = 350 //отступы слева и справа
 
 let isSwitchOn = false //состояние выключателя
+let currentOffset = 0
+let currentOffset2 = 0
+const dashGapArray = [10, 10] //[длина тире, отступ между тире]
+
 // ************************************ ОСНОВНАЯ ЧАСТЬ ****************************************
 
 draw()
@@ -79,11 +83,15 @@ draw()
 // ************************************ ФУНКЦИИ ****************************************
 function draw() {
 
+    // Отрисовка элементов электрической цепи
     drawPowerSource()
 
     drawSwitchKey()
 
     drawLamp()
+
+    // Отрисовка проводников
+    drawTopAndRightLines()
 
 }
 
@@ -169,5 +177,25 @@ function drawLamp() {
     //если выключатель включен, заливаем круг(лампочку) желтым цветом
     if (isSwitchOn) context.fill()
 }
+
+
+//Функция для отрисовки верхнюю и правую линии
+function drawTopAndRightLines() {
+
+    context.beginPath(); //Новая линия
+    // Верхняя горизонтальная линия(слева от выключателя)*****
+    context.dashedLine(paddingLeftRight, paddingTopBottom, canvas.width / 2 - 30, paddingTopBottom, dashGapArray, currentOffset);
+
+    //Верхняя горизонтальная линия(справа от выключателя) *****
+    context.dashedLine(canvas.width / 2 + 30, paddingTopBottom, canvas.width - paddingLeftRight, paddingTopBottom, dashGapArray, currentOffset);
+
+    // Правая вертикальная линия (до лампочки) *****
+    context.dashedLine(canvas.width - paddingLeftRight, paddingTopBottom, canvas.width - paddingLeftRight, canvas.height / 2 - 40, dashGapArray, currentOffset)
+
+    // Правая вертикальная линия (после лампочки) *****
+    context.dashedLine(canvas.width - paddingLeftRight, canvas.height / 2 + 20, canvas.width - paddingLeftRight, canvas.height - paddingTopBottom, dashGapArray, currentOffset)
+    context.stroke(); //Завершить линию
+
+};
 // ****************************************************************************************
 
