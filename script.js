@@ -75,12 +75,14 @@ let isSwitchOn = false //состояние выключателя
 let currentOffset = 0
 let currentOffset2 = 0
 const dashGapArray = [10, 10] //[длина тире, отступ между тире]
+const redrawInterval = 25 // интервал перерисовки(ms)
 
 // ************************************ ОСНОВНАЯ ЧАСТЬ ****************************************
 
-draw()
+window.setInterval(draw, redrawInterval);
 
 // ************************************ ФУНКЦИИ ****************************************
+
 function draw() {
 
     // Отрисовка элементов электрической цепи
@@ -94,6 +96,8 @@ function draw() {
     drawTopAndRightLines()
 
     drawLeftAndBottomLines()
+
+    updateOffsets(isSwitchOn)
 
 }
 
@@ -217,5 +221,16 @@ function drawLeftAndBottomLines() {
 
     context.stroke();
 };
-// ****************************************************************************************
 
+// Обновление отступов
+function updateOffsets(isSwitchOn) {
+    if (isSwitchOn) {
+        currentOffset += 10;
+        currentOffset2 -= 10;
+    }
+
+    if (currentOffset >= 100) currentOffset = 0;
+    if (currentOffset2 <= - 100) currentOffset2 = 0;
+}
+
+// ****************************************************************************************
