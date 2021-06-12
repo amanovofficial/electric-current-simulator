@@ -65,7 +65,7 @@ canvas.height = 700;
 let context = canvas.getContext('2d');
 context.lineWidth = 2
 context.font = '20px arial'
-context.strokeStyle = 'red' //цвет линий
+context.strokeStyle = '#90f542'//цвет линий
 context.fillStyle = 'yellow' //цвет заливки
 
 const paddingTopBottom = 130 //отступы сверху и снизу
@@ -106,6 +106,8 @@ function draw() {
 
 function drawPowerSource() {
     // Надпись источника питания
+    context.strokeStyle = 'red' //цвет линий
+
     context.strokeText('Источник', paddingLeftRight - 130, canvas.height / 2 - 30)
     context.strokeText('питания', paddingLeftRight - 130, canvas.height / 2 - 10)
 
@@ -122,11 +124,13 @@ function drawPowerSource() {
     context.moveTo(paddingLeftRight - 10, canvas.height / 2 - 15)
     context.lineTo(paddingLeftRight + 10, canvas.height / 2 - 15)
     context.stroke()
+    context.strokeStyle = '#90f542'
 }
 
 
 function drawSwitchKey() {
 
+    context.strokeStyle = 'red'
     context.strokeText('Выключатель', canvas.width / 2 - 55, paddingTopBottom - 40)
     context.beginPath();
 
@@ -162,6 +166,7 @@ function drawSwitchKey() {
 
     context.stroke()
     context.fill() //заливка круга цветом 
+    context.strokeStyle = '#90f542'
 
 }
 
@@ -172,6 +177,8 @@ function switchLamp() {
 
 
 function drawLamp() {
+
+    context.strokeStyle = 'red'
     // Надпись лампочки
     context.strokeText('Лампочка', canvas.width - 300, canvas.height / 2 - 5)
 
@@ -185,6 +192,8 @@ function drawLamp() {
 
     //если выключатель включен, заливаем круг(лампочку) желтым цветом
     if (isSwitchOn) context.fill()
+
+    context.strokeStyle = '#90f542'
 }
 
 
@@ -237,7 +246,7 @@ function updateOffsets(isSwitchOn) {
 }
 
 // Очистка результата предыдущего рендера
-function clear(){
+function clear() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
