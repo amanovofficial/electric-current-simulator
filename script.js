@@ -83,6 +83,8 @@ function draw() {
 
     drawSwitchKey()
 
+    drawLamp()
+
 }
 
 function drawPowerSource() {
@@ -151,5 +153,21 @@ function switchLamp() {
     isSwitchOn = isSwitchOn ? false : true
 }
 
+
+function drawLamp() {
+    // Надпись лампочки
+    context.strokeText('Лампочка', canvas.width - 300, canvas.height / 2 - 5)
+
+    // Лампочка
+    const radius = 30
+    context.beginPath()
+    context.moveTo(canvas.width - paddingLeftRight + radius, canvas.height / 2 - 10);
+    context.arc(canvas.width - paddingLeftRight, canvas.height / 2 - 10, radius, 0, 2 * Math.PI);
+    context.stroke();
+    // Лампочка end
+
+    //если выключатель включен, заливаем круг(лампочку) желтым цветом
+    if (isSwitchOn) context.fill()
+}
 // ****************************************************************************************
 
